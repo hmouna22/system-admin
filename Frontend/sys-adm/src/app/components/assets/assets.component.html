@@ -1,0 +1,59 @@
+<div class="container mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Assets List</h2>
+  
+      <!-- Export Buttons -->
+      <div class="mb-4">
+        <button
+          class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 mr-2"
+          (click)="exportToExcel()"
+        >
+          Export to Excel
+        </button>
+        <button
+          class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+          (click)="exportToPDF()"
+        >
+          Export to PDF
+        </button>
+      </div>
+  
+      <!-- Table to display assets -->
+      <table class="w-full table-auto border-collapse border border-gray-200">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Name</th>
+            <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Status</th>
+            <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Location</th>
+            <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">IP Address</th>
+            <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Next Preventive Maintenance</th>
+            <th class="border border-gray-300 px-4 py-2 text-left text-gray-700">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of assets">
+            <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ asset.name }}</td>
+            <td class="border border-gray-300 px-4 py-2">
+              <select
+                class="w-full px-3 py-1 bg-white border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring focus:ring-blue-300"
+              >
+                <option value="active" [selected]="asset.status === 'active'">Active</option>
+                <option value="inactive" [selected]="asset.status === 'inactive'">Inactive</option>
+                <option value="blocked" [selected]="asset.status === 'blocked'">Maintenance</option>
+                <option value="blocked" [selected]="asset.status === 'blocked'">Decommissioned</option>
+              </select>
+            </td>
+            <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ asset.location }}</td>
+            <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ asset.ip_address }}</td>
+            <td class="border border-gray-300 px-4 py-2 text-gray-600">{{ asset.next_preventive_maintenance | date }}</td>
+            <td class="border border-gray-300 px-4 py-2">
+              <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500">
+                Reports
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
